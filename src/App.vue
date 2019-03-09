@@ -1,61 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar
-      app
-      dark
-      color="primary"
-    >
-      <v-toolbar-items>
-        <v-btn
-          flat
-          class="text-uppercase title"
-          to="/"
-        >
-          License Manager
-        </v-btn>
-      </v-toolbar-items>
-      <v-spacer />
-      <v-toolbar-items>
-        <v-btn
-          flat
-          to="/about"
-        >
-          About
-        </v-btn>
-        <v-menu
-          v-if="isAuthed"
-          offset-y
-        >
-          <template v-slot:activator="{ on }">
-            <v-btn
-              flat
-              v-on="on"
-            >
-              Account
-              <v-icon dark>
-                arrow_drop_down
-              </v-icon>
-            </v-btn>
-          </template>
-          <v-list>
-            <v-list-tile to="/account/profile">
-              <v-list-tile-title>Profile</v-list-tile-title>
-            </v-list-tile>
-            <v-divider />
-            <v-list-tile @click="logOut">
-              <v-list-tile-title>Sign Out</v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
-        <v-btn
-          v-if="!isAuthed"
-          flat
-          to="/account/login"
-        >
-          Login
-        </v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
+    <the-nav-bar />
     <v-content>
       <transition
         name="fade"
@@ -64,24 +9,21 @@
         <router-view />
       </transition>
     </v-content>
+    <the-footer />
   </v-app>
 </template>
 
 <script>
+  import TheNavBar from './components/Layout/TheNavBar'
+  import TheFooter from './components/Layout/TheFooter'
+
   export default {
     name: 'App',
-    data: () => ({}),
-    computed: {
-      isAuthed () {
-        return this.$store.getters.isAuthed
-      }
+    components: {
+      TheNavBar,
+      TheFooter
     },
-    methods: {
-      logOut () {
-        this.$store.dispatch('logout')
-        this.$router.push('/')
-      }
-    }
+    data: () => ({})
   }
 </script>
 

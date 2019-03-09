@@ -32,6 +32,9 @@
 </template>
 
 <script>
+  import firebase from 'firebase/app'
+  import 'firebase/auth'
+
   export default {
     computed: {
       user () {
@@ -47,10 +50,14 @@
     },
     methods: {
       loginGoogle () {
-        this.$store.dispatch('loginWithGoogle')
+        firebase
+          .auth()
+          .signInWithPopup(new firebase.auth.GoogleAuthProvider())
       },
       loginAnonymous () {
-        this.$store.dispatch('loginAnonymously')
+        firebase
+          .auth()
+          .signInAnonymously()
       }
     }
   }
