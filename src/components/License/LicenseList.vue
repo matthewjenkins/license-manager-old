@@ -8,31 +8,31 @@
       color="primary"
     />
   </div>
-  <v-list
+  <v-container
     v-else
-    three-line
+    fluid
+    grid-list-lg
   >
-    <template v-for="(license, index) in licenses">
-      <v-divider :key="index" />
-      <v-list-tile :key="license.id">
-        <v-list-tile-content>
-          <v-list-tile-title>{{ license.title }}</v-list-tile-title>
-          <v-list-tile-sub-title>{{ license.key }}</v-list-tile-sub-title>
-        </v-list-tile-content>
-        <v-list-tile-action>
-          <delete-license :license-id="license.id" />
-        </v-list-tile-action>
-      </v-list-tile>
-    </template>
-  </v-list>
+    <v-layout
+      row
+      wrap
+    >
+      <license-item
+        v-for="license in licenses"
+        :key="license.id"
+        :license="license"
+      />
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
-  import DeleteLicense from '@/components/License/DeleteLicense'
+
+  import LicenseItem from '@/components/License/LicenseItem'
   export default {
     name: 'LicenseList',
     components: {
-      DeleteLicense
+      LicenseItem
     },
     data: () => ({
       busy: false,

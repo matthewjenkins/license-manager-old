@@ -133,10 +133,15 @@
       addLicense () {
         if (!this.$refs.form.validate()) return
 
+        let expires = null
+        if (this.expiresOn) {
+          expires = new Date(new Date(this.expiresOn).setHours(0, 0, 0, 0))
+        }
+
         const license = {
           title: this.title,
           key: this.key,
-          expiresOn: this.expiresOn,
+          expiresOn: expires,
           createdOn: new Date()
         }
 

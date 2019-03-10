@@ -29,7 +29,13 @@ export default {
           const licenses = []
           const s = snapshot.val()
           for (const l in s) {
-              licenses.push(s[l])
+              const license = s[l]
+              license.createdOn = new Date(license.createdOn)
+              if (license.expiresOn) {
+                license.expiresOn = new Date(license.expiresOn)
+              }
+
+              licenses.push(license)
           }
           commit('SET_LICENSES', licenses)
         })

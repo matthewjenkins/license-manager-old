@@ -1,9 +1,7 @@
 <template>
   <v-layout>
     <v-flex>
-      <v-card>
-        <license-list />
-      </v-card>
+      <license-list />
       <v-layout
         column
         class="fab-container"
@@ -30,7 +28,7 @@
 <style>
 .fab-container {
     position: fixed;
-    bottom: 15px;
+    bottom: 18px;
     right: 0;
 }
 </style>
