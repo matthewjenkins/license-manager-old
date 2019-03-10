@@ -24,7 +24,18 @@ new Vue({
     })
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.$store.dispatch('autoLogin', user)
+        const auth = {
+          id: user.uid,
+          name: user.displayName,
+          email: user.email,
+          photoUrl: user.photoURL
+        }
+
+        if (user.isAnonymous) {
+          auth.name = 'Anonymous'
+        }
+
+        this.$store.dispatch('setLogin', auth)
       }
     })
   },

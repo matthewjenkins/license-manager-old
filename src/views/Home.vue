@@ -1,13 +1,11 @@
 <template>
-  <hello-world />
+  <div>
+    Home is where the fart is
+  </div>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
-
   export default {
-    components: {
-      HelloWorld
-    }
+    components: {}
   }
 </script>
