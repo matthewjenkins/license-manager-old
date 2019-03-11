@@ -38,6 +38,14 @@ const router = new Router({
       component: () => import('./views/Account/Register.vue')
     },
     {
+      path: '/licenses',
+      name: 'licenses',
+      component: () => import('./views/Licenses.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '*',
       name: 'not-found',
       component: () => import('./views/NotFound.vue')
