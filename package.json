@@ -10,7 +10,6 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "postbuild": "cp src\\_redirects dist\\",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
