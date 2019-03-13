@@ -27,7 +27,7 @@
         >
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Add</v-toolbar-title>
+        <v-toolbar-title>Add A New License</v-toolbar-title>
         <v-spacer />
         <v-toolbar-items>
           <v-btn

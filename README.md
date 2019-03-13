@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/599fffa4-b02e-4fb2-82f7-db4f9d531904/deploy-status)](https://app.netlify.com/sites/licensemanager/deploys)
+
 # License Manager
 
 ## Project setup
@@ -30,12 +32,6 @@ npm run test
 
 ```bash
 npm run lint
-```
-
-### Run your end-to-end tests
-
-```bash
-npm run test:e2e
 ```
 
 ### Run your unit tests
