@@ -9,19 +9,16 @@
         <router-view />
       </transition>
     </v-content>
-    <the-footer />
   </v-app>
 </template>
 
 <script>
   import TheNavBar from './components/Layout/TheNavBar'
-  import TheFooter from './components/Layout/TheFooter'
 
   export default {
     name: 'App',
     components: {
-      TheNavBar,
-      TheFooter
+      TheNavBar
     },
     data: () => ({})
   }
