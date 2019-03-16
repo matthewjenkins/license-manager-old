@@ -1,11 +1,39 @@
 <template>
-  <div>
-    <h1>Profile</h1>
-    <img
-      :src="user.photoUrl"
-      alt=""
+  <v-container>
+    <v-layout
+      row
+      wrap
     >
-  </div>
+      <v-flex>
+        <h1 class="headline">
+          My Profile
+        </h1>
+        <v-avatar
+          size="96"
+          color="grey lighten-4"
+        >
+          <img
+            :src="user.photoUrl"
+            alt="avatar"
+          >
+        </v-avatar>
+      </v-flex>
+    </v-layout>
+    <v-layout
+      row
+      wrap
+      class="pt-3"
+    >
+      <v-flex>
+        <v-text-field
+          box
+          disabled
+          label="Name"
+          :value="user.name"
+        />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -18,4 +46,5 @@
   }
 </script>
 
-<style></style>
+<style>
+</style>
