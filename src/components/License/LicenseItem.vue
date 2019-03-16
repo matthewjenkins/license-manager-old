@@ -29,6 +29,15 @@
               class="grey--text"
             >Expires: {{ createdDate }}</span><br>
           </div>
+          <v-chip
+            v-for="(tag, index) in license.tags"
+            :key="index"
+            small
+            color="secondary"
+            text-color="white"
+          >
+            {{ tag }}
+          </v-chip>
         </v-flex>
       </v-card-title>
       <v-card-actions class="px-3 pt-0">

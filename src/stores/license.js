@@ -3,7 +3,8 @@ import 'firebase/database'
 
 export default {
   state: {
-    licenses: []
+    licenses: [],
+    tags: []
   },
   mutations: {
     SET_LICENSES (state, payload) {
@@ -14,6 +15,12 @@ export default {
     },
     REMOVE_LICENSE (state, payload) {
       state.licenses = state.licenses.filter(f => f.id !== payload)
+    },
+    SET_TAGS (state, payload) {
+      state.tags = payload
+    },
+    ADD_TAGS (state, payload) {
+      state.tags.push(payload)
     }
   },
   actions: {
@@ -40,7 +47,7 @@ export default {
           commit('SET_LICENSES', licenses)
         })
     },
-    addLicense ({ commit }, payload) {
+    addLicense ({ commit, state }, payload) {
         const userId = firebase.auth().currentUser.uid
 
         var record = firebase
@@ -54,9 +61,24 @@ export default {
 
         record.update(license)
         commit('ADD_LICENSE', license)
+
+        console.log('tags', state.tags)
+        console.log('setTags', license.tags)
+        const newTags = license.tags.filter(t => !state.tags.includes(t))
+        if (newTags.length) {
+        for (const newTag of newTags) {
+          firebase
+          .database()
+          .ref(`users/${userId}`)
+          .child('tags')
+          .push(newTag)
+        }
+
+        commit('ADD_TAGS', newTags)
+      }
     },
     deleteLicense ({ commit }, payload) {
-        const userId = firebase.auth().currentUser.uid
+      const userId = firebase.auth().currentUser.uid
       const licenseId = payload
 
       firebase.database()
@@ -66,11 +88,30 @@ export default {
       .remove().then(() => {
         commit('REMOVE_LICENSE', licenseId)
       })
+    },
+    fetchTags ({ commit }) {
+      const userId = firebase.auth().currentUser.uid
+      firebase.database()
+      .ref(`users/${userId}`)
+      .child('tags')
+      .once('value')
+      .then(snapshot => {
+        const tags = []
+        const s = snapshot.val()
+        for (const t in s) {
+          console.log(s[t])
+          tags.push(s[t])
+        }
+        commit('SET_TAGS', tags)
+      })
     }
   },
   getters: {
     licenses (state) {
       return state.licenses
+    },
+    tags (state) {
+      return state.tags
     }
   }
 }

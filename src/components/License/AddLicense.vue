@@ -52,7 +52,7 @@
             <v-form
               ref="form"
               v-model="valid"
-              lazy-validation=""
+              lazy-validation
             >
               <v-text-field
                 v-model="title"
@@ -105,6 +105,26 @@
                   </v-btn>
                 </v-date-picker>
               </v-dialog>
+              <v-combobox
+                v-model="selectedTags"
+                :items="tags"
+                :search-input.sync="tagSearch"
+                hide-selected
+                hint="redgate, sql server 2016, etc"
+                label="Tags"
+                multiple
+                small-chips
+              >
+                <template v-slot:no-data>
+                  <v-list-tile>
+                    <v-list-tile-content>
+                      <v-list-tile-title>
+                        No results matching "<strong>{{ tagSearch }}</strong>". Press <kbd>enter</kbd> to create a new one
+                      </v-list-tile-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                </template>
+              </v-combobox>
             </v-form>
           </v-flex>
         </v-layout>
@@ -120,15 +140,21 @@
       expiresOnDialog: false,
       valid: false,
       title: '',
-      titleRules: [
-        v => !!v || 'Title is required'
-      ],
+      titleRules: [v => !!v || 'Title is required'],
       key: '',
-      keyRules: [
-        v => !!v || 'Key is request'
-      ],
-      expiresOn: null
+      keyRules: [v => !!v || 'Key is request'],
+      expiresOn: null,
+      selectedTags: [],
+      tagSearch: ''
     }),
+    computed: {
+      tags () {
+        return this.$store.getters.tags
+      }
+    },
+    mounted () {
+      if (!this.tags.length) this.fetchTags()
+    },
     methods: {
       addLicense () {
         if (!this.$refs.form.validate()) return
@@ -142,13 +168,17 @@
           title: this.title,
           key: this.key,
           expiresOn: expires,
-          createdOn: new Date()
+          createdOn: new Date(),
+          tags: this.selectedTags
         }
 
         this.addDialog = false
         this.$refs.form.reset()
 
         this.$store.dispatch('addLicense', license)
+      },
+      fetchTags () {
+        this.$store.dispatch('fetchTags')
       }
     }
   }

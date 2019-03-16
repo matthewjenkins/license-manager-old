@@ -29,14 +29,13 @@
         <v-card-actions>
           <v-spacer />
           <v-btn
-            color="green darken-1"
             flat
             @click="dialog = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            color="green darken-1"
+            color="red"
             flat
             @click="deleteLicense"
           >
