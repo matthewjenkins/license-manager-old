@@ -62,8 +62,6 @@ export default {
         record.update(license)
         commit('ADD_LICENSE', license)
 
-        console.log('tags', state.tags)
-        console.log('setTags', license.tags)
         const newTags = license.tags.filter(t => !state.tags.includes(t))
         if (newTags.length) {
         for (const newTag of newTags) {
@@ -99,7 +97,6 @@ export default {
         const tags = []
         const s = snapshot.val()
         for (const t in s) {
-          console.log(s[t])
           tags.push(s[t])
         }
         commit('SET_TAGS', tags)
