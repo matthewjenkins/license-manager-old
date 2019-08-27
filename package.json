@@ -33,7 +33,7 @@
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.9.0",
     "eslint": "^5.16.0",
-    "eslint-config-vuetify": "^0.2.0",
+    "eslint-config-vuetify": "^0.3.0",
     "eslint-plugin-vue": "^5.2.3",
     "fibers": "^4.0.1",
     "sass": "^1.22.10",
